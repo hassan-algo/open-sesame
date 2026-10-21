@@ -1,0 +1,47 @@
+# ───────────────────────────────────────────────────────────────
+# Engagement artifacts — NEVER commit target/client data.
+# Pentest reports and recon output are kept locally, not shared.
+# ───────────────────────────────────────────────────────────────
+*-pentest-report.*
+*-stakeholder-report.*
+*-passive-recon.*
+*-authenticated-test-plan.*
+*-recon-findings.*
+*-clickjacking-poc.*
+# (also catches the per-target files at the repo root)
+
+# ───────────────────────────────────────────────────────────────
+# Skill eval/dev artifacts — regenerable; benchmarks are kept
+# inside the skill at evals/benchmarks/ instead.
+# ───────────────────────────────────────────────────────────────
+.claude/skills/web-pentest-workspace/
+*-workspace/
+
+# ───────────────────────────────────────────────────────────────
+# Local Claude Code settings (keep the skill, drop local config)
+# ───────────────────────────────────────────────────────────────
+.claude/settings.local.json
+.claude/*.local.json
+
+# ───────────────────────────────────────────────────────────────
+# Scratch / temp
+# ───────────────────────────────────────────────────────────────
+scratchpad/
+tmp/
+*.tmp
+*.log
+
+# ───────────────────────────────────────────────────────────────
+# OS / editor
+# ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# ───────────────────────────────────────────────────────────────
+# Node (render tooling may pull marked via npx)
+# ───────────────────────────────────────────────────────────────
+node_modules/
