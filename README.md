@@ -136,8 +136,7 @@ merged.
 
 ## 📜 License
 
-[MIT](LICENSE) — free to use, modify, and share. (Swap in a different license if you
-prefer.)
+[MIT](LICENSE) — free to use, modify, and share.
 
 ## 🙏 Acknowledgements
 
