@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>open-sesame — AI web-pentest skill for Claude</title>
+<meta name="description" content="An AI web-application penetration-testing skill for Claude Code. Recon, OWASP WSTG testing, validated findings, and dev + stakeholder reports. Authorized testing only.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --border:#2a313c; --text:#e6edf3;
+    --muted:#9aa6b2; --gold:#e8b64c; --blue:#4493f8; --purple:#8A5CF6;
+    --maxw:960px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(900px 520px at 85% -10%, rgba(232,182,76,.10), transparent 60%),
+      radial-gradient(760px 520px at -5% 0%, rgba(138,92,246,.12), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:-apple-system,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--blue);text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px;}
+
+  header{border-bottom:1px solid var(--border);position:sticky;top:0;
+    backdrop-filter:blur(8px);background:rgba(13,17,23,.72);z-index:10;}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .nav .brand{font-weight:800;font-size:18px;letter-spacing:-.3px;}
+  .nav a.gh{color:var(--text);border:1px solid var(--border);padding:7px 14px;
+    border-radius:8px;font-size:14px;font-weight:600;}
+  .nav a.gh:hover{border-color:var(--gold);}
+
+  .hero{text-align:center;padding:84px 16px 64px;}
+  .hero .kick{color:var(--gold);font-weight:700;letter-spacing:4px;
+    text-transform:uppercase;font-size:13px;}
+  .hero h1{font-size:clamp(44px,8vw,76px);font-weight:800;letter-spacing:-2px;margin:14px 0 6px;}
+  .hero .tag{font-size:clamp(18px,3.4vw,24px);color:var(--text);font-weight:600;max-width:620px;margin:10px auto 6px;}
+  .hero .sub{color:var(--muted);font-style:italic;margin-bottom:26px;}
+  .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn{padding:12px 22px;border-radius:10px;font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:8px;}
+  .btn.primary{background:var(--gold);color:#0d1117;}
+  .btn.primary:hover{filter:brightness(1.07);}
+  .btn.ghost{border:1px solid var(--border);color:var(--text);}
+  .btn.ghost:hover{border-color:var(--gold);}
+  .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+  .badges img{height:22px;}
+
+  section{padding:52px 0;}
+  h2{font-size:28px;font-weight:800;letter-spacing:-.5px;text-align:center;margin-bottom:8px;}
+  .lead{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 34px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;}
+  .card .ic{font-size:26px;margin-bottom:10px;}
+  .card h3{font-size:17px;margin-bottom:6px;}
+  .card p{color:var(--muted);font-size:14.5px;}
+
+  .steps{counter-reset:s;max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .step{display:flex;gap:16px;align-items:flex-start;background:var(--panel);
+    border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+  .step .n{counter-increment:s;flex:0 0 38px;height:38px;width:38px;border-radius:10px;
+    background:rgba(232,182,76,.14);border:1px solid rgba(232,182,76,.4);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;font-weight:800;}
+  .step .n::before{content:counter(s);}
+  .step h3{font-size:16px;margin-bottom:2px;}
+  .step p{color:var(--muted);font-size:14.5px;}
+
+  pre{background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:18px 20px;overflow-x:auto;font-size:14px;max-width:720px;margin:0 auto;}
+  code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;color:#d6e2f0;}
+  .comment{color:var(--muted);}
+
+  .warn{max-width:760px;margin:0 auto;background:rgba(187,128,9,.12);
+    border:1px solid rgba(232,182,76,.4);border-left:4px solid var(--gold);
+    border-radius:10px;padding:20px 22px;}
+  .warn b{color:var(--gold);}
+
+  footer{border-top:1px solid var(--border);padding:30px 16px;text-align:center;color:var(--muted);font-size:14px;margin-top:40px;}
+  footer a{color:var(--text);font-weight:600;}
+  .pill{display:inline-block;background:var(--gold);color:#0d1117;font-weight:700;
+    font-size:12px;padding:3px 10px;border-radius:999px;}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <span class="brand">🔓 open-sesame</span>
+  <a class="gh" href="https://github.com/hassan-algo/open-sesame">View on GitHub ↗</a>
+</div></header>
+
+<div class="hero">
+  <div class="kick">AI Web-Pentest Skill · Claude Code</div>
+  <h1>open-sesame 🔓</h1>
+  <div class="tag">Find the security holes in your website — before hackers do.</div>
+  <div class="sub">Say the magic words, and the web app opens up — the authorized way.</div>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/hassan-algo/open-sesame">⭐ Star on GitHub</a>
+    <a class="btn ghost" href="#install">Get started</a>
+  </div>
+  <div class="badges">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome">
+    <img src="https://img.shields.io/badge/Claude-Skill-8A5CF6.svg" alt="Claude Skill">
+    <img src="https://img.shields.io/badge/methodology-OWASP%20WSTG-005FAD.svg" alt="OWASP WSTG">
+  </div>
+</div>
+
+<section class="wrap">
+  <h2>What it does</h2>
+  <p class="lead">Point it at a web app you're authorized to test, and it runs the whole engagement like a methodical penetration tester would.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">🔎</div><h3>Recon &amp; mapping</h3><p>Enumerates subdomains, endpoints, parameters, and tech to chart the full attack surface.</p></div>
+    <div class="card"><div class="ic">🛡️</div><h3>OWASP WSTG testing</h3><p>Works category by category through the OWASP Web Security Testing Guide — auth, access control, injection, and more.</p></div>
+    <div class="card"><div class="ic">✅</div><h3>Validated findings</h3><p>Confirms real issues with the lightest safe proof instead of dumping false positives.</p></div>
+    <div class="card"><div class="ic">🔑</div><h3>Authenticated &amp; multi-tenant</h3><p>Tests logged-in flows and cross-tenant isolation — where the highest-impact bugs live.</p></div>
+    <div class="card"><div class="ic">📄</div><h3>Reports, two audiences</h3><p>Writes a technical report for engineers and a plain-English summary for stakeholders — both as PDF.</p></div>
+    <div class="card"><div class="ic">⚙️</div><h3>Open &amp; readable</h3><p>Just Markdown instructions and small scripts. No fine-tuning, no black box — read every line.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>How it works</h2>
+  <p class="lead">A disciplined five-phase workflow — each phase feeds the next.</p>
+  <div class="steps">
+    <div class="step"><div class="n"></div><div><h3>Scope &amp; authorization</h3><p>Confirms you're allowed to test the target and records the rules of engagement first.</p></div></div>
+    <div class="step"><div class="n"></div><div><h3>Recon &amp; mapping</h3><p>Builds the attack surface: hosts, endpoints, parameters, technologies, and roles.</p></div></div>
+    <div class="step"><div class="n"></div><div><h3>Vulnerability testing</h3><p>Works the OWASP WSTG categories against everything it mapped.</p></div></div>
+    <div class="step"><div class="n"></div><div><h3>Safe validation</h3><p>Proves real impact with minimal, non-destructive proof-of-concept.</p></div></div>
+    <div class="step"><div class="n"></div><div><h3>Reporting</h3><p>Turns findings into clear, actionable reports for devs and leadership.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap" id="install">
+  <h2>Install</h2>
+  <p class="lead">Drop the skill where Claude Code discovers skills, then just ask for a pentest.</p>
+  <pre><code><span class="comment"># Per project</span>
+git clone https://github.com/hassan-algo/open-sesame.git
+cp -r open-sesame/.claude/skills/web-pentest .claude/skills/
+
+<span class="comment"># …then in Claude Code:</span>
+"Pentest my web app at https://staging.myapp.example — I own it. Start with recon."</code></pre>
+</section>
+
+<section class="wrap">
+  <div class="warn">
+    <p>⚠️ <b>Authorized testing only.</b> This skill is for systems you <b>own</b> or have <b>explicit permission</b> to test (your own apps, a signed client engagement, an in-scope bug-bounty target, or a CTF / practice lab). It's designed to refuse unauthorized targets and prefer non-destructive proofs. Using it against systems you don't have permission to test may be illegal — you are responsible for staying within scope and the law.</p>
+  </div>
+</section>
+
+<footer>
+  <p><span class="pill">MIT · free</span> &nbsp; Open source — built as a Claude Agent Skill.</p>
+  <p style="margin-top:10px;"><a href="https://github.com/hassan-algo/open-sesame">github.com/hassan-algo/open-sesame</a></p>
+</footer>
+</body>
+</html>
