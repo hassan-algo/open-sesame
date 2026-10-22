@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      samba smbclient ldb-tools samba-dsdb-modules samba-vfs-modules \
+      winbind krb5-user dnsutils ldap-utils \
+ && rm -rf /var/lib/apt/lists/*
+COPY provision.sh /provision.sh
+RUN chmod +x /provision.sh
+# AD DC service ports (kept on the internal lab network only)
+EXPOSE 53 88 135 139 389 445 464 636 3268 3269
+ENTRYPOINT ["/provision.sh"]

@@ -4,6 +4,7 @@
 # ───────────────────────────────────────────────────────────────
 *-pentest-report.*
 *-stakeholder-report.*
+*-how-to-recreate.*
 *-passive-recon.*
 *-authenticated-test-plan.*
 *-recon-findings.*
@@ -45,3 +46,6 @@ Thumbs.db
 # Node (render tooling may pull marked via npx)
 # ───────────────────────────────────────────────────────────────
 node_modules/
+
+# Local engagement output — target data, never commit.
+reports/

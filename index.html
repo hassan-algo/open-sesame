@@ -23,7 +23,7 @@
     line-height:1.6; -webkit-font-smoothing:antialiased;
   }
   a{color:var(--blue);text-decoration:none;}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 16px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-left:16px;padding-right:16px;}
 
   header{border-bottom:1px solid var(--border);position:sticky;top:0;
     backdrop-filter:blur(8px);background:rgba(13,17,23,.72);z-index:10;}
@@ -48,9 +48,9 @@
   .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
   .badges img{height:22px;}
 
-  section{padding:52px 0;}
+  section{padding:84px 0;}
   h2{font-size:28px;font-weight:800;letter-spacing:-.5px;text-align:center;margin-bottom:8px;}
-  .lead{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 34px;}
+  .lead{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 44px;}
 
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;}
@@ -67,6 +67,14 @@
   .step .n::before{content:counter(s);}
   .step h3{font-size:16px;margin-bottom:2px;}
   .step p{color:var(--muted);font-size:14.5px;}
+  .step .t{flex:0 0 64px;height:30px;border-radius:8px;background:rgba(68,147,248,.14);
+    border:1px solid rgba(68,147,248,.4);color:var(--blue);display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums;}
+
+  .stat .ic{font-size:26px;margin-bottom:10px;}
+  .stat .big{font-size:30px;font-weight:800;letter-spacing:-.5px;color:var(--gold);}
+  .stat h3{font-size:15px;margin:2px 0 6px;}
+  .stat p{color:var(--muted);font-size:14px;}
 
   pre{background:var(--panel);border:1px solid var(--border);border-radius:12px;
     padding:18px 20px;overflow-x:auto;font-size:14px;max-width:720px;margin:0 auto;}
@@ -78,7 +86,40 @@
     border-radius:10px;padding:20px 22px;}
   .warn b{color:var(--gold);}
 
-  footer{border-top:1px solid var(--border);padding:30px 16px;text-align:center;color:var(--muted);font-size:14px;margin-top:40px;}
+  .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;}
+  .case{background:var(--panel);border:1px solid var(--border);border-top:3px solid var(--gold);
+    border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:16px;}
+  .case:nth-child(2){border-top-color:var(--blue);}
+  .case:nth-child(3){border-top-color:var(--purple);}
+  .case .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;
+    padding:2px 9px;border-radius:6px;}
+  .case h3{font-size:19px;line-height:1.3;}
+  .case-time{display:flex;flex-wrap:wrap;gap:12px 28px;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .case-time .big{display:block;font-size:24px;white-space:nowrap;font-weight:800;letter-spacing:-.5px;color:var(--text);line-height:1.1;}
+  .case-time .lbl{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+  .case p{color:var(--muted);font-size:14.5px;}
+  .case ul{list-style:none;color:var(--muted);font-size:14.5px;display:flex;flex-direction:column;gap:6px;}
+  .case li::before{content:"→ ";color:var(--gold);font-weight:700;}
+  .case-link{margin-top:auto;font-weight:700;font-size:15px;}
+
+  .tl{position:relative;max-width:720px;margin:0 auto;padding-left:30px;display:flex;flex-direction:column;gap:18px;}
+  .tl::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--border);}
+  .tl-item{position:relative;}
+  .tl-item::before{content:"";position:absolute;left:-30px;top:6px;width:16px;height:16px;border-radius:50%;
+    background:var(--panel);border:2px solid var(--blue);}
+  .tl-item.gold::before{border-color:var(--gold);}
+  .tl-item.dim::before{border-color:var(--muted);}
+  .tl-item.win::before{background:var(--gold);border-color:var(--gold);}
+  .tl-time{font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--blue);font-variant-numeric:tabular-nums;}
+  .tl-item.gold .tl-time{color:var(--gold);}
+  .tl-item.dim .tl-time{color:var(--muted);}
+  .tl-item h3{font-size:16px;margin:2px 0 4px;}
+  .tl-item p{color:var(--muted);font-size:14.5px;}
+  .tl-item .dead{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--muted);
+    border:1px dashed var(--border);border-radius:6px;padding:1px 8px;}
+
+  footer{border-top:1px solid var(--border);padding:40px 16px;text-align:center;color:var(--muted);font-size:14px;margin-top:0;}
   footer a{color:var(--text);font-weight:600;}
   .pill{display:inline-block;background:var(--gold);color:#0d1117;font-weight:700;
     font-size:12px;padding:3px 10px;border-radius:999px;}
@@ -93,7 +134,7 @@
 <div class="hero">
   <div class="kick">AI Web-Pentest Skill · Claude Code</div>
   <h1>open-sesame 🔓</h1>
-  <div class="tag">Find the security holes in your website — before hackers do.</div>
+  <div class="tag">Find the security holes in your web apps and networks — before hackers do.</div>
   <div class="sub">Say the magic words, and the web app opens up — the authorized way.</div>
   <div class="btns">
     <a class="btn primary" href="https://github.com/hassan-algo/open-sesame">⭐ Star on GitHub</a>
@@ -115,7 +156,7 @@
     <div class="card"><div class="ic">🛡️</div><h3>OWASP WSTG testing</h3><p>Works category by category through the OWASP Web Security Testing Guide — auth, access control, injection, and more.</p></div>
     <div class="card"><div class="ic">✅</div><h3>Validated findings</h3><p>Confirms real issues with the lightest safe proof instead of dumping false positives.</p></div>
     <div class="card"><div class="ic">🔑</div><h3>Authenticated &amp; multi-tenant</h3><p>Tests logged-in flows and cross-tenant isolation — where the highest-impact bugs live.</p></div>
-    <div class="card"><div class="ic">📄</div><h3>Reports, two audiences</h3><p>Writes a technical report for engineers and a plain-English summary for stakeholders — both as PDF.</p></div>
+    <div class="card"><div class="ic">📄</div><h3>Three reports, two audiences</h3><p>Writes a technical report for engineers, a plain-English stakeholder summary, and a how-to-recreate guide — all as PDF.</p></div>
     <div class="card"><div class="ic">⚙️</div><h3>Open &amp; readable</h3><p>Just Markdown instructions and small scripts. No fine-tuning, no black box — read every line.</p></div>
   </div>
 </section>
@@ -132,15 +173,124 @@
   </div>
 </section>
 
+<section class="wrap" id="skills">
+  <h2>Two skills, one workflow</h2>
+  <p class="lead">Each skill follows an established methodology from scoping through reporting. Pick the one that matches your target.</p>
+  <div class="cases">
+    <article class="case">
+      <div class="chips"><span class="chip">Web apps</span><span class="chip">OWASP WSTG</span></div>
+      <h3>web-pentest</h3>
+      <p class="case-body">Recon of a web application, then category-by-category OWASP WSTG testing, including authenticated and multi-tenant flows.</p>
+      <ul>
+        <li>Maps endpoints, parameters, and roles</li>
+        <li>Validates findings with the lightest safe proof</li>
+      </ul>
+    </article>
+    <article class="case">
+      <div class="chips"><span class="chip">Networks</span><span class="chip">PTES · NIST 800-115</span></div>
+      <h3>net-pentest</h3>
+      <p class="case-body">External perimeter and internal Active Directory testing, from host discovery and enumeration to privilege escalation and lateral movement.</p>
+      <ul>
+        <li>Covers AD attacks, password attacks, and pivoting</li>
+        <li>Stays in scope, and cleans up after itself</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="wrap" id="inside">
+  <h2>What's inside</h2>
+  <p class="lead">Each skill ships with focused reference guides, so the agent loads only the material it needs for the step in front of it.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">📚</div><h3>web-pentest references</h3><p>Methodology, tooling, post-exploitation, reporting, and lab targets for practice.</p></div>
+    <div class="card"><div class="ic">🏢</div><h3>net-pentest references</h3><p>Active Directory, privilege escalation, password attacks, pivoting, containers, cloud identity, wireless, and tooling.</p></div>
+    <div class="card"><div class="ic">🧪</div><h3>Eval runs</h3><p>Trigger and behavior test cases, including scope refusals, plus recorded benchmark runs for web-pentest.</p></div>
+    <div class="card"><div class="ic">🧰</div><h3>Report scripts</h3><p>A render script turns the Markdown reports into PDFs with Chrome, weasyprint, or cupsfilter.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="benchmark">
+  <h2>Benchmark: a real engagement</h2>
+  <p class="lead">The <b>net-pentest</b> skill on a throwaway Active Directory lab: no credentials, no map, timed from the first command.</p>
+
+  <div class="grid">
+    <div class="card stat"><div class="ic">⏱️</div><div class="big">≈ 14 min</div><h3>Cold start → Domain Admin</h3><p>First command to confirmed Domain Admin.</p></div>
+    <div class="card stat"><div class="ic">🅾️</div><div class="big">0 creds</div><h3>Assumed-breach start</h3><p>On the network, no accounts, no prior knowledge of the domain.</p></div>
+    <div class="card stat"><div class="ic">📄</div><div class="big">≈ 17 min</div><h3>Delivered PDFs</h3><p>Three reports, rendered. About 1.5 min of that is reporting.</p></div>
+  </div>
+
+  <h3 class="tl-head" style="text-align:center;margin:56px 0 28px;font-size:18px;">The chain it walked</h3>
+  <div class="tl">
+    <div class="tl-item"><div class="tl-time">00:00</div><h3>Anonymous enumeration</h3><p>Null-session SMB and SAMR returned the full user list. No login needed.</p></div>
+    <div class="tl-item"><div class="tl-time">~05:00</div><h3>Password spray</h3><p>A lockout-safe seasonal spray recovered two accounts on the first pass.</p></div>
+    <div class="tl-item dim"><div class="tl-time">~07:00</div><h3>Dead ends, documented</h3><p>AS-REP Roast, Kerberoast, and DCSync hit Samba and impacket interop bugs. Recorded as tooling limits, not faked.</p><span class="dead">≈ 7 min lost to interop</span></div>
+    <div class="tl-item gold"><div class="tl-time">~12:00</div><h3>Privilege escalation</h3><p>An over-broad ACL let a service account force-reset the built-in Administrator's password.</p></div>
+    <div class="tl-item win"><div class="tl-time">~14:00</div><h3>Domain Admin</h3><p>Authenticated as Administrator, created and verified a new account, then cleaned up.</p></div>
+  </div>
+
+  <div class="warn" style="margin-top:44px;">
+    <p>🧪 <b>Honest by design.</b> Roughly half the time was dead ends. The two privilege-escalation findings were lab-injected with the owner's approval, and the reports say so plainly rather than presenting a clean win. <a href="https://github.com/hassan-algo/open-sesame/blob/main/BENCHMARKS.md">Read the full write-up →</a></p>
+  </div>
+</section>
+
+<section class="wrap" id="case-studies">
+  <h2>Case studies</h2>
+  <p class="lead">Three timed lab engagements, run end to end with the skills in this repo.</p>
+  <div class="cases">
+    <article class="case">
+      <div class="chips"><span class="chip">Docker</span><span class="chip">net-pentest</span></div>
+      <h3>Metasploitable2 → root</h3>
+      <div class="case-time">
+        <div><span class="big">≈ 3 min</span><span class="lbl">To root</span></div>
+        <div><span class="big">≈ 6 min</span><span class="lbl">Incl. PDFs</span></div>
+      </div>
+      <ul>
+        <li>Zero credentials; the target publishes its own access path</li>
+        <li>A second, unauthenticated upload route</li>
+      </ul>
+      <a class="case-link" href="https://github.com/hassan-algo/open-sesame/blob/main/CASE-STUDY.md">Read case study →</a>
+    </article>
+
+    <article class="case">
+      <div class="chips"><span class="chip">Samba AD</span><span class="chip">net-pentest</span></div>
+      <h3>Domain Admin from nothing</h3>
+      <div class="case-time">
+        <div><span class="big">≈ 14 min</span><span class="lbl">To Domain Admin</span></div>
+        <div><span class="big">≈ 17 min</span><span class="lbl">Incl. PDFs</span></div>
+      </div>
+      <ul>
+        <li>No credentials; anonymous enumeration, then a password spray</li>
+        <li>Dead ends documented, not hidden</li>
+      </ul>
+      <a class="case-link" href="https://github.com/hassan-algo/open-sesame/blob/main/CASE-STUDY.md">Read case study →</a>
+    </article>
+
+    <article class="case">
+      <div class="chips"><span class="chip">Docker</span><span class="chip">web-pentest</span></div>
+      <h3>Juice Shop → admin</h3>
+      <div class="case-time">
+        <div><span class="big">≈ 2.5 min</span><span class="lbl">Active</span></div>
+        <div><span class="big">≈ 5 min</span><span class="lbl">Incl. PDFs</span></div>
+      </div>
+      <ul>
+        <li>No account; admin access and customer data exposed</li>
+        <li>Read-only, with three PDFs rendered</li>
+      </ul>
+      <a class="case-link" href="https://github.com/hassan-algo/open-sesame/blob/main/CASE-STUDY.md">Read case study →</a>
+    </article>
+  </div>
+</section>
+
 <section class="wrap" id="install">
   <h2>Install</h2>
   <p class="lead">Drop the skill where Claude Code discovers skills, then just ask for a pentest.</p>
-  <pre><code><span class="comment"># Per project</span>
+  <pre><code><span class="comment"># Per project (both skills)</span>
 git clone https://github.com/hassan-algo/open-sesame.git
-cp -r open-sesame/.claude/skills/web-pentest .claude/skills/
+cp -r open-sesame/.claude/skills/* .claude/skills/
 
 <span class="comment"># …then in Claude Code:</span>
-"Pentest my web app at https://staging.myapp.example — I own it. Start with recon."</code></pre>
+"Pentest my web app at https://staging.myapp.example — I own it. Start with recon."
+"Scan this subnet and enumerate the hosts — it's my lab network."</code></pre>
 </section>
 
 <section class="wrap">

@@ -1,0 +1,9 @@
+FROM kalilinux/kali-rolling
+ENV DEBIAN_FRONTEND=noninteractive
+# Attacker toolkit: impacket (GetNPUsers/GetUserSPNs/secretsdump),
+# netexec (nxc), bloodhound.py, john for offline cracking, plus enum basics.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      impacket-scripts netexec bloodhound.py john \
+      nmap smbclient ldap-utils krb5-user iproute2 dnsutils ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /loot

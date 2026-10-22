@@ -2,25 +2,29 @@
 
 # open-sesame 🔓
 
-**An AI web-application penetration-testing skill for [Claude](https://claude.com/claude-code).**
+**AI penetration-testing skills for [Claude](https://claude.com/claude-code) — web apps *and* networks.**
 
-*Say the magic words, and the web app opens up — the authorized way.*
+*Say the magic words, and the target opens up — the authorized way.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Claude Skill](https://img.shields.io/badge/Claude-Skill-8A5CF6.svg)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
-[![Methodology: OWASP WSTG](https://img.shields.io/badge/methodology-OWASP%20WSTG-005FAD.svg)](https://owasp.org/www-project-web-security-testing-guide/)
+[![Claude Skills](https://img.shields.io/badge/Claude-Skills-8A5CF6.svg)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
+[![Methodology: OWASP WSTG + PTES](https://img.shields.io/badge/methodology-OWASP%20WSTG%20%2B%20PTES-005FAD.svg)](https://owasp.org/www-project-web-security-testing-guide/)
 
 </div>
 
 ---
 
-`open-sesame` is a **skill** that turns Claude into a disciplined web-app penetration
-tester. Give it a target you're authorized to assess and it runs the whole engagement —
-maps the attack surface, works methodically through the [OWASP Web Security Testing
-Guide](https://owasp.org/www-project-web-security-testing-guide/), validates findings
-with the lightest safe proof, and writes clean reports for both engineers and
-leadership.
+`open-sesame` is a **suite of skills** that turns Claude into a disciplined penetration
+tester. Point it at a target you're authorized to assess and it runs the whole
+engagement — maps the attack surface, works methodically through an industry
+methodology, validates findings with the lightest safe proof, and writes clean reports
+for both engineers and leadership.
+
+| Skill | For | Methodology |
+|-------|-----|-------------|
+| **[`web-pentest`](.claude/skills/web-pentest/)** | A single web application / API | OWASP WSTG |
+| **[`net-pentest`](.claude/skills/net-pentest/)** | Networks & infrastructure, incl. Active Directory | PTES / NIST SP 800-115 |
 
 It's built as a set of Markdown instructions and small helper scripts — no model
 fine-tuning, no binaries. You can read every line of what it tells Claude to do.
@@ -35,19 +39,20 @@ fine-tuning, no binaries. You can read every line of what it tells Claude to do.
 
 ## ✨ What it does
 
-- **Authorization-first** — confirms scope and rules of engagement before any active test.
-- **Full OWASP WSTG coverage** — recon, configuration, authentication, session
-  management, access control (incl. multi-tenant isolation), injection, error/crypto,
-  business logic, client-side, and API-specific tests.
-- **Tooling playbook** — how to drive Burp Suite, ffuf, nuclei, sqlmap, nmap,
-  subfinder/httpx and friends, chained into a repeatable workflow.
-- **Authenticated & multi-tenant testing** — what to request from the client and how to
-  prove cross-user / cross-tenant access safely.
-- **Safe RCE validation** — prove code execution with the lightest signal first;
-  reverse/bind shells, TTY upgrade, and strict cleanup rules only when impact must be
-  shown.
-- **Reports for two audiences** — a technical findings report *and* a plain-language
-  stakeholder summary, each rendered to **PDF**.
+- **Authorization-first** — both skills confirm scope and rules of engagement before any
+  active test, and treat third-party platform/cloud infrastructure as out of scope.
+- **Web (`web-pentest`)** — full OWASP WSTG coverage: recon, configuration, auth, session,
+  access control (incl. multi-tenant isolation), injection, crypto, business logic,
+  client-side, and API tests; safe RCE validation and reverse shells.
+- **Network (`net-pentest`)** — PTES-based external *and* internal testing: host discovery,
+  port/service scanning, enumeration, vuln ID, exploitation, privilege escalation (Linux +
+  Windows), pivoting, and **Active Directory** attacks (Kerberoasting, BloodHound, NTLM
+  relay, the path to Domain Admin) — plus **hybrid/cloud identity** (Entra ID, AWS),
+  **Wi-Fi**, and **container/Kubernetes** testing.
+- **Tooling playbooks** — concrete, safe-usage workflows for Burp, ffuf, nuclei, sqlmap,
+  nmap, masscan, netexec, impacket, responder, BloodHound, and more.
+- **Three reports, two audiences** — a technical findings report, a plain-language
+  stakeholder summary, and a how-to-recreate guide, each rendered to **PDF**.
 
 ## 🚀 Quick start
 
@@ -56,31 +61,34 @@ fine-tuning, no binaries. You can read every line of what it tells Claude to do.
 Clone into a location Claude discovers skills from:
 
 ```bash
-# Per project (available inside one repo)
+# Per project (available inside one repo) — installs both skills
 git clone https://github.com/hassan-algo/open-sesame.git
-cp -r open-sesame/.claude/skills/web-pentest .claude/skills/
+cp -r open-sesame/.claude/skills/* .claude/skills/
 
 # Or personal (available in every project)
-cp -r open-sesame/.claude/skills/web-pentest ~/.claude/skills/
+cp -r open-sesame/.claude/skills/* ~/.claude/skills/
 ```
 
 ### 2. Use it
 
-In Claude Code, just describe the work — the skill triggers automatically:
+In Claude Code, just describe the work — the right skill triggers automatically:
 
 ```
 Pentest my web app at https://staging.myapp.example — I own it. Start with recon.
+Scan my network 10.0.0.0/24 and enumerate Active Directory — it's my lab.
 ```
 
-It also triggers on phrases like *"find vulns in my web app"*, *"test this endpoint for
-IDOR/SQLi"*, *"map the attack surface"*, *"write up this finding"*, or *"validate this
-RCE"* — or invoke it explicitly with `/web-pentest`.
+`web-pentest` triggers on things like *"find vulns in my web app"*, *"test for IDOR/SQLi"*,
+*"validate this RCE"*; `net-pentest` on *"scan this subnet"*, *"enumerate these hosts"*,
+*"Kerberoasting / BloodHound"*, *"privilege escalation on this box"*. Or invoke explicitly
+with `/web-pentest` or `/net-pentest`.
 
 ### 3. Get PDF reports
 
 After a report is drafted in Markdown, render it to a styled PDF:
 
 ```bash
+# each skill ships the same renderer
 .claude/skills/web-pentest/scripts/render-report.sh report.md report.pdf
 ```
 
@@ -91,33 +99,54 @@ from each stage.
 ## 🗂️ How it's organized
 
 ```
-.claude/skills/web-pentest/
-├── SKILL.md                     # entry point: authorization, workflow, pointers
-├── references/
-│   ├── methodology.md           # the OWASP WSTG test checklist (the core)
-│   ├── tooling.md               # tool commands & safe-usage workflows
-│   ├── post-exploitation.md     # RCE validation, reverse shells, cleanup
-│   ├── reporting.md             # severity (CVSS), evidence, dual-audience + PDF
-│   └── lab-targets.md           # legal practice targets & a learning path
-├── assets/
-│   └── report-template.md       # fill-in findings report
-├── scripts/
-│   └── render-report.sh         # Markdown report → styled PDF
-└── evals/
-    ├── evals.json               # trigger/behavior test cases
-    └── benchmarks/              # validation results
+.claude/skills/
+├── web-pentest/                 # single web application (OWASP WSTG)
+│   ├── SKILL.md                 #   authorization, workflow, pointers
+│   ├── references/              #   methodology, tooling, post-exploitation,
+│   │                            #   reporting, lab-targets
+│   ├── assets/report-template.md
+│   ├── scripts/render-report.sh
+│   └── evals/                   #   test cases + benchmarks
+└── net-pentest/                 # networks & Active Directory (PTES / NIST)
+    ├── SKILL.md
+    ├── references/              #   methodology, active-directory, privesc,
+    │                            #   pivoting, password-attacks, cloud-identity,
+    │                            #   wireless, containers, tooling, reporting,
+    │                            #   lab-targets
+    ├── assets/report-template.md
+    ├── scripts/render-report.sh
+    └── evals/evals.json         #   trigger/behavior test cases
 ```
 
-Skills use **progressive disclosure**: `SKILL.md` is always loaded; the `references/`
+Supporting folders at the repo root:
+
+- **`ad-lab/`** — the Docker Compose Samba AD lab (one domain controller, one attacker
+  box) used for the `net-pentest` benchmark.
+- **`index.html`** — the project landing page.
+- **`reports/`** — generated engagement reports. Keep them local: `reports/` is not yet in
+  `.gitignore`, so add it before committing.
+
+Each skill uses **progressive disclosure**: `SKILL.md` is always loaded; the `references/`
 files are pulled in only when a phase needs them, keeping the context lean and the
 workflow fast.
 
 ## 🧪 Validation
 
-The skill was built and tuned with Anthropic's `skill-creator` and validated across two
-eval iterations — methodology, reporting, authorization-gating, RCE/reverse-shell
+`web-pentest` was built and tuned with Anthropic's `skill-creator` and validated across
+two eval iterations — methodology, reporting, authorization-gating, RCE/reverse-shell
 guidance, cross-tenant IDOR, and scope discipline. Summary results live in
 [`.claude/skills/web-pentest/evals/benchmarks/`](.claude/skills/web-pentest/evals/benchmarks/).
+
+Beyond the evals, see **[`BENCHMARKS.md`](BENCHMARKS.md)** for timed, end-to-end
+engagements, and **[`CASE-STUDY.md`](CASE-STUDY.md)** for the story behind each one:
+
+| Target | Skill | Objective | Active | Total (incl. PDFs) |
+|--------|-------|-----------|--------|--------------------|
+| Metasploitable2 (Docker) | `web-pentest` + `net-pentest` | Root | ≈ 3 min | ≈ 6 min |
+| Samba AD lab (`ad-lab/`) | `net-pentest` | Domain Admin | ≈ 14 min | ≈ 17 min |
+| OWASP Juice Shop (Docker) | `web-pentest` | Admin + customer data | ≈ 2.5 min | ≈ 5 min |
+
+Dead ends and lab-injected findings are documented, not hidden.
 
 ## 🤝 Contributing
 
@@ -141,8 +170,9 @@ merged.
 ## 🙏 Acknowledgements
 
 - Methodology based on the [OWASP Web Security Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
-  and the [OWASP Top 10](https://owasp.org/www-project-top-ten/).
-- Built as a [Claude Agent Skill](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview).
+  & [Top 10](https://owasp.org/www-project-top-ten/), the [PTES](http://www.pentest-standard.org/),
+  [NIST SP 800-115](https://csrc.nist.gov/pubs/sp/800/115/final), and [MITRE ATT&CK](https://attack.mitre.org/).
+- Built as [Claude Agent Skills](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview).
 
 ---
 
