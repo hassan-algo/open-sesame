@@ -1,6 +1,6 @@
 # Case study — timed lab engagements with `open-sesame`
 
-This page tells the story behind the numbers in [`BENCHMARKS.md`](BENCHMARKS.md). It covers
+This page tells the story behind the numbers in [`BENCHMARKS.md`](../benchmarks/BENCHMARKS.md). It covers
 three lab engagements run end to end with the skills in this repo, and what they show about
 the skills, the tooling, and the report output.
 

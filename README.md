@@ -7,7 +7,7 @@
 *Say the magic words, and the target opens up — the authorized way.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](docs/contributing/CONTRIBUTING.md)
 [![Claude Skills](https://img.shields.io/badge/Claude-Skills-8A5CF6.svg)](https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview)
 [![Methodology: OWASP WSTG + PTES](https://img.shields.io/badge/methodology-OWASP%20WSTG%20%2B%20PTES-005FAD.svg)](https://owasp.org/www-project-web-security-testing-guide/)
 
@@ -135,8 +135,8 @@ two eval iterations — methodology, reporting, authorization-gating, RCE/revers
 guidance, cross-tenant IDOR, and scope discipline. Summary results live in
 [`.claude/skills/web-pentest/evals/benchmarks/`](.claude/skills/web-pentest/evals/benchmarks/).
 
-Beyond the evals, see **[`BENCHMARKS.md`](BENCHMARKS.md)** for timed, end-to-end
-engagements, and **[`CASE-STUDY.md`](CASE-STUDY.md)** for the story behind each one:
+Beyond the evals, see **[`BENCHMARKS.md`](docs/benchmarks/BENCHMARKS.md)** for timed, end-to-end
+engagements, and **[`CASE-STUDY.md`](docs/case-studies/CASE-STUDY.md)** for the story behind each one:
 
 | Target | Skill | Objective | Active | Total (incl. PDFs) |
 |--------|-------|-----------|--------|--------------------|
@@ -156,7 +156,7 @@ first contributions:
 - **Improve reporting** — templates, severity guidance, or the `render-report.sh` backends.
 - **Add eval cases** — new prompts in `evals/` that catch gaps or regressions.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes. Please keep everything
+See [CONTRIBUTING.md](docs/contributing/CONTRIBUTING.md) for how to propose changes. Please keep everything
 aligned with the skill's core principle: **authorized, non-destructive, methodical
 testing** — contributions that add offensive capability without that framing won't be
 merged.

@@ -108,7 +108,7 @@ report file mtimes), not a stopwatch. Expect roughly **±30–60 seconds** of ac
 
 ---
 
-*See the [case study](CASE-STUDY.md) for the narrative behind this run.*
+*See the [case study](../case-studies/CASE-STUDY.md) for the narrative behind this run.*
 
 ---
 
