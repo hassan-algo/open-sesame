@@ -12,9 +12,7 @@ as an honest record of where tooling hit its limits.
 
 ## 1. `net-pentest` — internal Active Directory, no creds → Domain Admin
 
-**Target:** a throwaway Samba AD lab (`lab.local`), built for the exercise
-([`ad-lab/`](ad-lab/)) — one domain controller, one attacker box, isolated Docker
-network.
+**Target:** a throwaway Samba AD lab (`lab.local`), built for the exercise: one domain controller, one attacker box, isolated Docker network.
 **Start state:** assumed-breach — on the network, **zero credentials**, no map, no hints.
 **Objective:** reach full Domain Admin control and produce the deliverables.
 **Result:** ✅ **objective reached — full Domain Admin.**

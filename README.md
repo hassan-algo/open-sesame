@@ -120,8 +120,6 @@ from each stage.
 
 Supporting folders at the repo root:
 
-- **`ad-lab/`** — the Docker Compose Samba AD lab (one domain controller, one attacker
-  box) used for the `net-pentest` benchmark.
 - **`index.html`** — the project landing page.
 - **`reports/`** — generated engagement reports. Keep them local: `reports/` is not yet in
   `.gitignore`, so add it before committing.
@@ -143,7 +141,7 @@ engagements, and **[`CASE-STUDY.md`](CASE-STUDY.md)** for the story behind each 
 | Target | Skill | Objective | Active | Total (incl. PDFs) |
 |--------|-------|-----------|--------|--------------------|
 | Metasploitable2 (Docker) | `web-pentest` + `net-pentest` | Root | ≈ 3 min | ≈ 6 min |
-| Samba AD lab (`ad-lab/`) | `net-pentest` | Domain Admin | ≈ 14 min | ≈ 17 min |
+| Samba AD lab | `net-pentest` | Domain Admin | ≈ 14 min | ≈ 17 min |
 | OWASP Juice Shop (Docker) | `web-pentest` | Admin + customer data | ≈ 2.5 min | ≈ 5 min |
 
 Dead ends and lab-injected findings are documented, not hidden.

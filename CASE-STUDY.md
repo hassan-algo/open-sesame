@@ -54,7 +54,7 @@ never exposed beyond the lab network.
 ## Case 2 — Samba Active Directory lab: no credentials to Domain Admin
 
 **Context.** A throwaway Samba AD domain (`lab.local`) was built in an isolated Docker network
-for this exercise. See [`ad-lab/`](ad-lab/). The domain has one domain controller and one
+for this exercise. The domain has one domain controller and one
 attacker host. The attacker starts with a network position and nothing else.
 
 **What the skills did.**
