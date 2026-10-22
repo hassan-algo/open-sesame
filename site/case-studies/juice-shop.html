@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Juice Shop case study — open-sesame</title>
+<meta name="description" content="Juice Shop timed run: anonymous to admin in about two and a half minutes.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="../../index.html" style="color:var(--text)">🔓 open-sesame</a>
+  <a class="gh" href="https://github.com/hassan-algo/open-sesame">View on GitHub ↗</a>
+</div></header>
+<main class="article">
+
+<div class="kick">Case study 3 · Docker</div>
+<h1>OWASP Juice Shop: anonymous to admin in two and a half minutes</h1>
+<div class="meta"><span class="chip">Docker</span><span class="chip">web-pentest</span></div><div class="figures"><div class="fig"><span class="big">≈ 2.5 min</span><span class="lbl">Active</span></div><div class="fig"><span class="big">≈ 5 min</span><span class="lbl">Incl. PDFs</span></div></div>
+<h2>Context</h2>
+<p>OWASP Juice Shop is an intentionally vulnerable web application and a common practice target. It ran in its own separate Docker container and was reached at <code>localhost:3000</code>.</p>
+
+<h2>What the skills did</h2>
+<ul>
+  <li><b>Recon.</b> The login, product search, and file-serving features were mapped, along with the API endpoints behind them.</li>
+  <li><b>Targeted validation.</b> Each suspected issue was checked with the smallest proof that shows impact. Nothing was changed on the target.</li>
+  <li><b>Access and data exposure.</b> Without any account, the login path gave administrator access. A separate search weakness exposed the customer account records, and a public folder exposed files marked confidential.</li>
+  <li><b>Lower-severity issues.</b> The run also recorded a DOM-based cross-site scripting issue, weak password hashing, verbose error messages, and missing security headers.</li>
+  <li><b>Reporting.</b> Seven findings were written up across three reports and rendered to PDF.</li>
+</ul>
+
+<h2>What it shows</h2>
+<ul>
+  <li><b>Known targets are fast, which limits the number.</b> The active phase took about two and a half minutes. That comes from a deliberately broken app with a published catalogue of flaws, so it says little about an unfamiliar one.</li>
+  <li><b>Impact drives the rating.</b> The two critical findings each needed a single request. The stakeholder summary explains their impact in plain terms: full admin control and exposure of every customer record. That framing is what leadership acts on.</li>
+  <li><b>Read-only testing still proves the point.</b> The run changed and deleted nothing and still showed complete compromise.</li>
+</ul>
+
+<h2>Lessons</h2>
+<ul>
+  <li>Fix the root cause, not the symptom. The two critical findings share a database query pattern, so one fix closes both break-in and data-theft paths.</li>
+  <li>Note how timings were taken. These were timed by hand, so they are less precise than the Metasploitable2 log-based numbers.</li>
+</ul>
+
+<h2>Generated files</h2>
+<p class="muted">Three PDFs, rendered from Markdown by the skill's render script.</p>
+<div class="files"><span class="file">juiceshop-technical-report.pdf</span><span class="file">juiceshop-stakeholder-report.pdf</span><span class="file">juiceshop-how-to-recreate.pdf</span></div></main>
+<footer>
+  <p><a href="../../index.html">← Back to open-sesame</a> &nbsp;·&nbsp; <a href="../benchmarks.html">All benchmarks</a></p>
+  <p style="margin-top:10px;">MIT · free &nbsp;·&nbsp; <a href="https://github.com/hassan-algo/open-sesame">github.com/hassan-algo/open-sesame</a></p>
+</footer>
+</body>
+</html>

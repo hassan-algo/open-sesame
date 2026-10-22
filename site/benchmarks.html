@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmarks — open-sesame</title>
+<meta name="description" content="Timed, end-to-end runs of the open-sesame skills.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="../index.html" style="color:var(--text)">🔓 open-sesame</a>
+  <a class="gh" href="https://github.com/hassan-algo/open-sesame">View on GitHub ↗</a>
+</div></header>
+<main class="article">
+
+<div class="kick">Benchmarks</div>
+<h1>Timed, end-to-end runs</h1>
+<p class="muted">Each run is timed from the first command. Dead ends and lab-injected findings are kept in, because a benchmark that hides them isn't a benchmark.</p>
+
+<table>
+  <tr><th>Target</th><th>Skill</th><th>Objective</th><th>Active</th><th>Total (incl. PDFs)</th></tr>
+  <tr><td><a href="case-studies/metasploitable2.html">Metasploitable2</a> (Docker)</td><td>web-pentest + net-pentest</td><td>Root</td><td>≈ 3 min</td><td>≈ 6 min</td></tr>
+  <tr><td><a href="case-studies/samba-ad.html">Samba AD lab</a></td><td>net-pentest</td><td>Domain Admin</td><td>≈ 14 min</td><td>≈ 17 min</td></tr>
+  <tr><td><a href="case-studies/juice-shop.html">OWASP Juice Shop</a> (Docker)</td><td>web-pentest</td><td>Admin + customer data</td><td>≈ 2.5 min</td><td>≈ 5 min</td></tr>
+</table>
+
+<h2>Samba AD timeline</h2>
+<p>Times are from the run's own timestamps and are accurate to about ±30–60 seconds.</p>
+<ul>
+  <li><b>00:00</b> Anonymous enumeration returned the full user list.</li>
+  <li><b>~05:00</b> A lockout-safe password spray recovered two accounts.</li>
+  <li><b>~07:00</b> Dead ends: AS-REP Roast, Kerberoast, and DCSync hit interop bugs (about seven minutes lost).</li>
+  <li><b>~12:00</b> An over-broad ACL let a service account reset the Administrator's password.</li>
+  <li><b>~14:00</b> Domain Admin confirmed, then cleaned up.</li>
+</ul>
+
+<h2>Caveats</h2>
+<ul>
+  <li><b>Metasploitable2</b> hands over its own access path, so the attack phase is unusually fast. Start-up time (about two minutes) is not counted.</li>
+  <li><b>Samba AD</b> is a two-host lab, not a Windows forest. Lateral movement, LSASS theft, and the Windows-specific techniques were not validated live.</li>
+  <li><b>Juice Shop</b> is built to be broken, and its timings were measured by hand.</li>
+</ul>
+</main>
+<footer>
+  <p><a href="../index.html">← Back to open-sesame</a> &nbsp;·&nbsp; <a href="benchmarks.html">All benchmarks</a></p>
+  <p style="margin-top:10px;">MIT · free &nbsp;·&nbsp; <a href="https://github.com/hassan-algo/open-sesame">github.com/hassan-algo/open-sesame</a></p>
+</footer>
+</body>
+</html>

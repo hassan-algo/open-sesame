@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samba AD case study — open-sesame</title>
+<meta name="description" content="Samba AD timed run: no credentials to Domain Admin in about fourteen minutes.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="../../index.html" style="color:var(--text)">🔓 open-sesame</a>
+  <a class="gh" href="https://github.com/hassan-algo/open-sesame">View on GitHub ↗</a>
+</div></header>
+<main class="article">
+
+<div class="kick">Case study 2 · Samba AD</div>
+<h1>Samba Active Directory: no credentials to Domain Admin</h1>
+<div class="meta"><span class="chip">Samba AD</span><span class="chip">net-pentest</span></div><div class="figures"><div class="fig"><span class="big">≈ 14 min</span><span class="lbl">To Domain Admin</span></div><div class="fig"><span class="big">≈ 17 min</span><span class="lbl">Incl. PDFs</span></div></div>
+<h2>Context</h2>
+<p>A throwaway Samba AD domain (<code>lab.local</code>) was built in an isolated Docker network for this exercise: one domain controller and one attacker host. The attacker starts with a network position and nothing else.</p>
+
+<h2>What the skills did</h2>
+<ul>
+  <li><b>Anonymous enumeration.</b> Null-session SMB and RPC queries returned the domain user list with no credentials.</li>
+  <li><b>Password spraying.</b> A small, lockout-safe candidate list, tried once per account, found two valid accounts on the first pass.</li>
+  <li><b>Privilege escalation through an ACL.</b> One service account held an over-broad right to reset the built-in Administrator's password. The reset needed no knowledge of the old one.</li>
+  <li><b>Domain Admin.</b> Access as Administrator was confirmed by creating a proof-of-concept account and checking it independently. That account was then deleted.</li>
+</ul>
+
+<h2>What went wrong, and why it stays in</h2>
+<ul>
+  <li>AS-REP Roasting, Kerberoasting, and DCSync all failed. The causes were interoperability gaps between Samba's KDC and DRSUAPI and the impacket tooling, not hardening. The report records each failure and says the techniques need re-validating against a real Windows domain controller.</li>
+  <li>About seven of the roughly fourteen minutes went to these dead ends. Leaving them out would make the run look cleaner and less useful to someone repeating it.</li>
+</ul>
+
+<h2>What it shows</h2>
+<ul>
+  <li><b>Planted findings are labelled.</b> Two critical findings were added mid-engagement, with the owner's approval, so a complete chain could be shown. The reports mark them as lab-injected in the executive summary, in each affected finding, and in the stakeholder note.</li>
+  <li><b>Methodology over exploit reliability.</b> A two-host lab has no Windows enterprise features, so lateral movement and LSASS theft could not be tested. The run shows the skill can drive the whole method and produce usable output. It does not show the Windows-specific techniques are reliable.</li>
+  <li><b>Cleanup is part of the job.</b> The proof-of-concept account was removed. The report notes that the Administrator password was left changed and must be reset before the lab is reused.</li>
+</ul>
+
+<h2>Lessons</h2>
+<ul>
+  <li>Document dead ends with their causes. A future tester will hit the same interop gaps.</li>
+  <li>Label every planted finding, so a reader can tell discovered from added.</li>
+  <li>Say what the target cannot prove. A two-host lab cannot stand in for a forest.</li>
+</ul>
+
+<h2>Generated files</h2>
+<p class="muted">Three PDFs, rendered from Markdown by the skill's render script.</p>
+<div class="files"><span class="file">adlab-technical-report.pdf</span><span class="file">adlab-stakeholder-report.pdf</span><span class="file">adlab-how-to-recreate.pdf</span></div></main>
+<footer>
+  <p><a href="../../index.html">← Back to open-sesame</a> &nbsp;·&nbsp; <a href="../benchmarks.html">All benchmarks</a></p>
+  <p style="margin-top:10px;">MIT · free &nbsp;·&nbsp; <a href="https://github.com/hassan-algo/open-sesame">github.com/hassan-algo/open-sesame</a></p>
+</footer>
+</body>
+</html>

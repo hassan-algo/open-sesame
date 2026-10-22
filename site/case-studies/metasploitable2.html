@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metasploitable2 case study — open-sesame</title>
+<meta name="description" content="Metasploitable2 timed run: zero credentials to root in about three minutes.">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="../../index.html" style="color:var(--text)">🔓 open-sesame</a>
+  <a class="gh" href="https://github.com/hassan-algo/open-sesame">View on GitHub ↗</a>
+</div></header>
+<main class="article">
+
+<div class="kick">Case study 1 · Docker</div>
+<h1>Metasploitable2: from zero to root in minutes</h1>
+<div class="meta"><span class="chip">Docker</span><span class="chip">net-pentest</span><span class="chip">web-pentest</span></div><div class="figures"><div class="fig"><span class="big">≈ 3 min</span><span class="lbl">To root</span></div><div class="fig"><span class="big">≈ 6 min</span><span class="lbl">Incl. PDFs</span></div></div>
+<h2>Context</h2>
+<p>Metasploitable2 is an intentionally insecure Linux image, a standard practice target for learning web and network testing. It ran locally in Docker and was never exposed beyond the lab network.</p>
+
+<h2>What the skills did</h2>
+<ul>
+  <li><b>Recon.</b> A port scan and service fingerprinting mapped the exposed network services and the web application.</li>
+  <li><b>Enumeration.</b> The web application was reviewed for exposed content, and the services were checked for default configuration. The landing page published a working credential, the kind of disclosure that turns recon into a shortcut.</li>
+  <li><b>Access and escalation.</b> The credential gave an authenticated shell. An over-permissive sudo configuration then allowed the account to reach root.</li>
+  <li><b>Independent finding.</b> A separate check found that the web server accepted file uploads with no authentication. This path does not depend on the first, so fixing the credential alone would not close it.</li>
+  <li><b>Reporting.</b> Three documents were produced and rendered to PDF.</li>
+</ul>
+
+<h2>What it shows</h2>
+<ul>
+  <li><b>Speed is a property of the target.</b> Most of the speed came from the target handing over its own access path. Don't read the run as a claim about real-world pace.</li>
+  <li><b>Dormant risk gets its own finding.</b> Several old, well-known services were not reachable from outside because of how the container's ports were set up. The report records them as informational, so a future port change isn't mistaken for a new problem.</li>
+  <li><b>Scope discipline held.</b> The engagement stopped once full access was proven and did not exploit the extra demo applications.</li>
+</ul>
+
+<h2>Lessons</h2>
+<ul>
+  <li>Read the landing page before scanning. Lab and real systems alike sometimes publish their own shortcuts.</li>
+  <li>Check for a second path to the same objective. One fix can leave the other path open.</li>
+  <li>Report timings with their precision and caveats. An unqualified "six minutes" invites the wrong comparison.</li>
+</ul>
+
+<h2>Generated files</h2>
+<p class="muted">Three PDFs, rendered from Markdown by the skill's render script.</p>
+<div class="files"><span class="file">metasploitable2-technical-report.pdf</span><span class="file">metasploitable2-stakeholder-report.pdf</span><span class="file">metasploitable2-how-to-recreate.pdf</span></div></main>
+<footer>
+  <p><a href="../../index.html">← Back to open-sesame</a> &nbsp;·&nbsp; <a href="../benchmarks.html">All benchmarks</a></p>
+  <p style="margin-top:10px;">MIT · free &nbsp;·&nbsp; <a href="https://github.com/hassan-algo/open-sesame">github.com/hassan-algo/open-sesame</a></p>
+</footer>
+</body>
+</html>
